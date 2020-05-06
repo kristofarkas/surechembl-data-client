@@ -337,7 +337,11 @@ class DataLoader:
 
                             # It's an integrity error, and duplicates are allowed.
                             known_count += 1
-                            duplicate_docs.add(pubnumber)                    
+                            duplicate_docs.add(pubnumber)
+
+                            # Reset transaction
+                            transaction.commit()
+                            transaction = sql_alc_conn.begin()
                             continue             
 
                         else:
